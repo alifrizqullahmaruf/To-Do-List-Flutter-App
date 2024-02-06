@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/constant/colors.dart';
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      backgroundColor: tdBGColor,
+      // appBar: ,
+    );
+  }
+
+  // App bar
+  // AppBar _buildApp() {
+
+  // }
+}
