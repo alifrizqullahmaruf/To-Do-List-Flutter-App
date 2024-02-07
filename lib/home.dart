@@ -11,14 +11,39 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: tdBGColor,
-      // appBar: ,
+      appBar: _buildApp(),
     );
   }
 
-  // App bar
-  // AppBar _buildApp() {
+  // Serach Box
+  Widget searchBox() {
+    return Container();
+  }
 
-  // }
+  // // App bar interface
+  AppBar _buildApp() {
+    return AppBar(
+      backgroundColor: tdBGColor,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Icon(
+            Icons.menu,
+            color: tdBlack,
+            size: 30,
+          ),
+          Container(
+            width: 40,
+            height: 40,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Image.asset('assets/images/avatar.jpeg'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
