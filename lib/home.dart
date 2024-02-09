@@ -21,6 +21,22 @@ class _HomeState extends State<Home> {
             child: Column(
               children: [
                 searchBox(),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: 50,
+                          bottom: 20,
+                        ),
+                        child: const Text(
+                          'All ToDos',
+                          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
+                ) //memperluas child widget ke dalam ruang yang tersedia dalam parent
               ],
             ),
           )
@@ -37,7 +53,7 @@ class _HomeState extends State<Home> {
         color: Colors.white38,
         borderRadius: BorderRadius.circular(20),
       ),
-      child:const TextField(
+      child: const TextField(
         // onChanged: (value) => _runFilter(value),
         decoration: InputDecoration(
             contentPadding: EdgeInsets.all(0),
@@ -75,7 +91,7 @@ class _HomeState extends State<Home> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: Image.asset('assets/images/avatar.jpeg'),
-            ),
+            ), // digunnakan untuk membuat corner radius
           ),
         ],
       ),
