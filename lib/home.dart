@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constant/colors.dart';
+import 'package:flutter_application_1/model/ToDo.dart';
+import 'package:flutter_application_1/widget/todo_item.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -9,6 +11,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final todosList = ToDo.todoList();
+  List<ToDo> _foundToDo = [];
+
+  @override
+  void initState() {
+    _foundToDo = todosList;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,9 +42,16 @@ class _HomeState extends State<Home> {
                         ),
                         child: const Text(
                           'All ToDos',
-                          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.w500),
                         ),
                       ),
+                      for (ToDo todoo in _foundToDo.reversed)
+                        ToDoItem(
+                          todo: todoo,
+                          onToDoChanged: _handleToDoChange,
+                          onDeleteItem: _deleteToDoItem,
+                        ),
                     ],
                   ),
                 ) //memperluas child widget ke dalam ruang yang tersedia dalam parent
@@ -43,6 +61,18 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+  }
+
+  void _handleToDoChange(ToDo todo) {
+    setState(() {
+      todo.isDone = !todo.isDone;
+    });
+  }
+
+  void _deleteToDoItem(String id) {
+    setState(() {
+      todosList.removeWhere((element) => element.id == id);
+    });
   }
 
   // Serach Box
