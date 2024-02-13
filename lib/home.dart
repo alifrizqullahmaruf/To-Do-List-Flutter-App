@@ -13,6 +13,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final todosList = ToDo.todoList();
   List<ToDo> _foundToDo = [];
+  final _todoController = TextEditingController();
 
   @override
   void initState() {
@@ -79,13 +80,30 @@ class _HomeState extends State<Home> {
                       ],
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      controller: _todoController,
+                      decoration: const InputDecoration(
                           hintText: 'Add a new todo item',
                           border: InputBorder.none),
                     ),
                   ),
                 ),
+                Container(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _addToDoList(_todoController.text);
+                    },
+                    child: Text(
+                      "+",
+                      style: TextStyle(fontSize: 40),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: tdBlue,
+                      minimumSize: Size(60, 60),
+                      elevation: 10,
+                    ),
+                  ),
+                )
               ],
             ),
           )
@@ -104,6 +122,18 @@ class _HomeState extends State<Home> {
     setState(() {
       todosList.removeWhere((element) => element.id == id);
     });
+  }
+
+  void _addToDoList(String toDo) {
+    setState(() {
+      todosList.add(
+        ToDo(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          todoText: toDo,
+        ),
+      );
+    });
+    _todoController.clear();
   }
 
   // Serach Box
