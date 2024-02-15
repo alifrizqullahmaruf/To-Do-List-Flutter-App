@@ -136,6 +136,22 @@ class _HomeState extends State<Home> {
     _todoController.clear();
   }
 
+  void _runFilter(String enteredKeyword) {
+    List<ToDo> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = todosList;
+    } else {
+      results = todosList
+          .where((item) => item.todoText!
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+    setState(() {
+      _foundToDo = results;
+    });
+  }
+
   // Serach Box
   Widget searchBox() {
     return Container(
@@ -144,9 +160,9 @@ class _HomeState extends State<Home> {
         color: Colors.white38,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: const TextField(
-        // onChanged: (value) => _runFilter(value),
-        decoration: InputDecoration(
+      child: TextField(
+        onChanged: (value) => _runFilter(value),
+        decoration: const InputDecoration(
             contentPadding: EdgeInsets.all(0),
             prefixIcon: Icon(
               Icons.search,
