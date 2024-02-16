@@ -118,11 +118,34 @@ class _HomeState extends State<Home> {
     });
   }
 
-  void _deleteToDoItem(String id) {
-    setState(() {
-      todosList.removeWhere((element) => element.id == id);
-    });
-  }
+void _deleteToDoItem(String id) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Konfirmasi'),
+        content: Text('Apakah Anda yakin ingin menghapus item ini?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('Tidak'),
+          ),
+          TextButton(
+            onPressed: () {
+              setState(() {
+                todosList.removeWhere((element) => element.id == id);
+              });
+              Navigator.of(context).pop();
+            },
+            child: Text('Ya'),
+          ),
+        ],
+      );
+    },
+  );
+}
 
   void _addToDoList(String toDo) {
     setState(() {

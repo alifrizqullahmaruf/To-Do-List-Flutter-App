@@ -20,6 +20,9 @@ class ToDoItem extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 20),
       child: ListTile(
         onTap: () {
+          // Toastnya
+          // ScaffoldMessenger.of(context)
+          //     .showSnackBar(SnackBar(content: Text("Berhasil")));
           onToDoChanged(todo);
         },
         shape: RoundedRectangleBorder(
@@ -43,7 +46,9 @@ class ToDoItem extends StatelessWidget {
         ),
         trailing: Container(
           padding: const EdgeInsets.all(0),
-          margin: const EdgeInsets.symmetric(vertical: 12),
+          margin: const EdgeInsets.symmetric(
+            vertical: 12,
+          ),
           width: 35,
           height: 35,
           decoration: BoxDecoration(
@@ -51,6 +56,8 @@ class ToDoItem extends StatelessWidget {
             color: tdRed,
           ),
           child: IconButton(
+            padding: const EdgeInsets.all(5),
+            iconSize: 24,
             onPressed: () {
               onDeleteItem(todo.id);
             },
